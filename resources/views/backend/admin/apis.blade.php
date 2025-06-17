@@ -1,12 +1,12 @@
 @extends('backend.index')
 
 @section('content-admin-css')
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 @endsection
 
 @section('content')
 <div class="container mt-4">
+    <!-- PUNTO 1 -->
     <h4><strong>API de Geolocalización</strong></h4>
 
     <div class="alert alert-warning d-none" id="geo-error" role="alert">
@@ -22,6 +22,7 @@
 
     <hr class="my-4">
 
+    <!-- PUNTO 2 -->
     <h4><strong>API de Canvas</strong></h4>
     <p>Dibuja con el mouse en el lienzo. Haz clic en "Guardar imagen" para descargarla.</p>
 
@@ -30,10 +31,47 @@
     </div>
 
     <button id="btnGuardar" class="btn btn-success">Guardar imagen (.png)</button>
+
+    <hr class="my-4">
+
+    <!-- PUNTO 3 -->
+    <h4><strong>API de Video embebido</strong></h4>
+    <p>Control personalizado de un video local.</p>
+
+    <div class="mb-3">
+        <video id="videoPlayer" width="500" height="300" style="border: 1px solid #000;" controls>
+            <source src="{{ asset('videos/demo.mp4') }}" type="video/mp4">
+            Tu navegador no soporta video HTML5.
+        </video>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary" id="btnPlay">▶️ Reproducir</button>
+        <button class="btn btn-warning" id="btnPause">⏸️ Pausar</button>
+        <button class="btn btn-info" id="btnRetroceder">⏪ -10s</button>
+        <button class="btn btn-info" id="btnAdelantar">⏩ +10s</button>
+    </div>
+
+    <div class="mb-3">
+        <label>Velocidad de reproducción:</label>
+        <input type="range" id="velocidad" min="0.5" max="2" step="0.1" value="1">
+        <span id="velocidadActual">1x</span>
+    </div>
+
+    <div class="mb-3">
+        <label>Volumen:</label>
+        <input type="range" id="volumen" min="0" max="1" step="0.1" value="1">
+        <span id="volumenActual">100%</span>
+    </div>
+
+    <div class="mb-3">
+        <p><strong>Tiempo actual:</strong> <span id="tiempoActual">0:00</span> / <strong>Duración:</strong> <span id="duracionTotal">0:00</span></p>
+        <p><strong>Estado:</strong> <span id="estadoVideo">Detenido</span></p>
+    </div>
+</div>
 @endsection
 
 @section('content-admin-js')
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
@@ -73,7 +111,7 @@
     </script>
 
     <script>
-        // PUNTO 2: API DE CANVAS
+        // PUNTO 2: CANVAS
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext("2d");
         let dibujando = false;
@@ -93,13 +131,8 @@
             }
         });
 
-        canvas.addEventListener("mouseup", () => {
-            dibujando = false;
-        });
-
-        canvas.addEventListener("mouseleave", () => {
-            dibujando = false;
-        });
+        canvas.addEventListener("mouseup", () => dibujando = false);
+        canvas.addEventListener("mouseleave", () => dibujando = false);
 
         document.getElementById("btnGuardar").addEventListener("click", () => {
             try {
@@ -109,8 +142,65 @@
                 enlace.click();
             } catch (err) {
                 console.error("Error al guardar imagen:", err);
-                alert("Hubo un problema al guardar la imagen.");
             }
+        });
+    </script>
+
+    <script>
+        // PUNTO 3: VIDEO EMBEBIDO PERSONALIZADO
+        const video = document.getElementById("videoPlayer");
+        const btnPlay = document.getElementById("btnPlay");
+        const btnPause = document.getElementById("btnPause");
+        const btnAdelantar = document.getElementById("btnAdelantar");
+        const btnRetroceder = document.getElementById("btnRetroceder");
+        const velocidad = document.getElementById("velocidad");
+        const volumen = document.getElementById("volumen");
+
+        const tiempoActual = document.getElementById("tiempoActual");
+        const duracionTotal = document.getElementById("duracionTotal");
+        const estadoVideo = document.getElementById("estadoVideo");
+        const velocidadActual = document.getElementById("velocidadActual");
+        const volumenActual = document.getElementById("volumenActual");
+
+        function formatearTiempo(segundos) {
+            const m = Math.floor(segundos / 60);
+            const s = Math.floor(segundos % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        video.addEventListener("loadedmetadata", () => {
+            duracionTotal.textContent = formatearTiempo(video.duration);
+        });
+
+        video.addEventListener("timeupdate", () => {
+            tiempoActual.textContent = formatearTiempo(video.currentTime);
+        });
+
+        video.addEventListener("play", () => {
+            estadoVideo.textContent = "Reproduciendo";
+        });
+
+        video.addEventListener("pause", () => {
+            estadoVideo.textContent = "Pausado";
+        });
+
+        video.addEventListener("ended", () => {
+            estadoVideo.textContent = "Finalizado";
+        });
+
+        btnPlay.addEventListener("click", () => video.play());
+        btnPause.addEventListener("click", () => video.pause());
+        btnAdelantar.addEventListener("click", () => video.currentTime += 10);
+        btnRetroceder.addEventListener("click", () => video.currentTime -= 10);
+
+        velocidad.addEventListener("input", () => {
+            video.playbackRate = parseFloat(velocidad.value);
+            velocidadActual.textContent = velocidad.value + "x";
+        });
+
+        volumen.addEventListener("input", () => {
+            video.volume = parseFloat(volumen.value);
+            volumenActual.textContent = Math.round(video.volume * 100) + "%";
         });
     </script>
 @endsection
