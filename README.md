@@ -1,5 +1,5 @@
 
-# Parcial 3 - Proyecto Laravel DTW135 GT02
+# Parcial 3 - APIS Y WEB WORKERS - DTW135 GT02
 
 Integrantes:  
 - Douglas Enrique Siguenza Quele  
