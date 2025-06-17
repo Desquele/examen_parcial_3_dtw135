@@ -8,26 +8,19 @@ use App\Http\Controllers\Backend\Roles\PermisoController;
 use App\Http\Controllers\Backend\Perfil\PerfilController;
 use App\Http\Controllers\Backend\Configuracion\ConfiguracionController;
 use App\Http\Controllers\Backend\Registro\RegistroController;
-
 use App\Http\Controllers\WorkerController;
-
-
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 
-
 // --- LOGIN ---
-
 Route::get('/', [LoginController::class,'index'])->name('login');
 
 Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 // --- CONTROL WEB ---
-
 Route::get('/panel', [ControlController::class,'indexRedireccionamiento'])->name('admin.panel');
 
 // --- ROLES ---
-
 Route::get('/admin/roles/index', [RolesController::class,'index'])->name('admin.roles.index');
 Route::get('/admin/roles/tabla', [RolesController::class,'tablaRoles']);
 Route::get('/admin/roles/lista/permisos/{id}', [RolesController::class,'vistaPermisos']);
@@ -39,7 +32,6 @@ Route::get('/admin/roles/permisos-todos/tabla', [RolesController::class,'tablaTo
 Route::post('/admin/roles/borrar-global', [RolesController::class, 'borrarRolGlobal']);
 
 // --- PERMISOS A USUARIOS ---
-
 Route::get('/admin/permisos/index', [PermisoController::class,'index'])->name('admin.permisos.index');
 Route::get('/admin/permisos/tabla', [PermisoController::class,'tablaUsuarios']);
 Route::post('/admin/permisos/nuevo-usuario', [PermisoController::class, 'nuevoUsuario']);
@@ -58,11 +50,14 @@ Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('
 
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
 
-
-
-// Solo para administradores: resource de Workers
 Route::middleware('auth')->group(function () {
-        Route::resource('workers', WorkerController::class)
-             ->only(['index']) 
-             ->names('workers');
-    });    
+    Route::resource('workers', WorkerController::class)->only(['index'])->names('workers');
+
+    //API de Geolocalización
+    Route::get('/admin/apis', function () {
+        return view('backend.admin.apis', [
+            'titulo' => 'API de Geolocalización',
+            'ruta' => null
+        ]);
+    })->name('admin.apis');
+});
