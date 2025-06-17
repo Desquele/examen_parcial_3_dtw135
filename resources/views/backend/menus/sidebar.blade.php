@@ -50,7 +50,7 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.apis') }}" target="frameprincipal" class="nav-link">
                             <i class="nav-icon fas fa-map-marked-alt"></i>
-                            <p>API Geolocalización</p>
+                            <p>APIs</p>
                         </a>
                     </li>
                 @endhasrole
