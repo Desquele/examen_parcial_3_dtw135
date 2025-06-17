@@ -133,7 +133,6 @@ Puedes acceder usando:
 - Control de volumen y velocidad
 
 ![video](https://github.com/user-attachments/assets/42ec9986-5cf6-4656-9478-d3de418afdab)
-)
 
 ---
 
