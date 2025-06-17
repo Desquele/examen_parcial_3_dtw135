@@ -110,6 +110,7 @@ Puedes acceder usando:
 
 - Vista: `apis.blade.php`
 - Obtención automática de coordenadas (latitud, longitud)
+- Es importante que si levanta el proyecto en HERD, activar la opción de HTTPS para que la API funcione correctamente
 
 ![geolocalización](https://github.com/user-attachments/assets/dc21bc2a-b061-48f1-b7af-62bc43666afa)
 
