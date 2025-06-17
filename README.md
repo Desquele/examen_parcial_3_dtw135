@@ -112,7 +112,6 @@ Puedes acceder usando:
 - Obtención automática de coordenadas (latitud, longitud)
 
 ![geolocalización](https://github.com/user-attachments/assets/dc21bc2a-b061-48f1-b7af-62bc43666afa)
-)
 
 ---
 
@@ -122,7 +121,6 @@ Puedes acceder usando:
 - Botón para guardar dibujo como `.png` (cliente)
 
 ![canvas](https://github.com/user-attachments/assets/78f05b52-2dd6-4c70-9f55-ec2dbe8d0743)
-)
 
 ---
 
@@ -141,4 +139,3 @@ Puedes acceder usando:
 - Entrada de número límite para generar números primos
 
 ![web worker](https://github.com/user-attachments/assets/471a0c19-a50c-4823-8b66-0bef489ec549)
-)
