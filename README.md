@@ -111,7 +111,7 @@ Puedes acceder usando:
 - Vista: `apis.blade.php`
 - Obtención automática de coordenadas (latitud, longitud)
 
-![geolocalización](![image](https://github.com/user-attachments/assets/dc21bc2a-b061-48f1-b7af-62bc43666afa)
+![geolocalización](https://github.com/user-attachments/assets/dc21bc2a-b061-48f1-b7af-62bc43666afa)
 )
 
 ---
@@ -121,7 +121,7 @@ Puedes acceder usando:
 - Área de dibujo libre con mouse (líneas negras)
 - Botón para guardar dibujo como `.png` (cliente)
 
-![canvas](![image](https://github.com/user-attachments/assets/78f05b52-2dd6-4c70-9f55-ec2dbe8d0743)
+![canvas](https://github.com/user-attachments/assets/78f05b52-2dd6-4c70-9f55-ec2dbe8d0743)
 )
 
 ---
@@ -132,7 +132,7 @@ Puedes acceder usando:
 - Indicador de tiempo actual y duración total
 - Control de volumen y velocidad
 
-![video](![image](https://github.com/user-attachments/assets/42ec9986-5cf6-4656-9478-d3de418afdab)
+![video](https://github.com/user-attachments/assets/42ec9986-5cf6-4656-9478-d3de418afdab)
 )
 
 ---
@@ -141,5 +141,5 @@ Puedes acceder usando:
 
 - Entrada de número límite para generar números primos
 
-![web worker](![image](https://github.com/user-attachments/assets/471a0c19-a50c-4823-8b66-0bef489ec549)
+![web worker](https://github.com/user-attachments/assets/471a0c19-a50c-4823-8b66-0bef489ec549)
 )
